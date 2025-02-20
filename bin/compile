@@ -71,7 +71,9 @@ if [ -f "$RUNTIME_FILE" ] ; then
     exit 0
 else
     log "Generating .python_version from uv Python version"
-    uv python pin > .python_version
+    PYTHON_VERSION_OUTPUT=$(uv run python --version)
+    echo "${PYTHON_VERSION_OUTPUT//Python /}" > .python_version
+    cat .python_version | indent
 fi
 
 log "Uninstalling uv-managed Python versions"
