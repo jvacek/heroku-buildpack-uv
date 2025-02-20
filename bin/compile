@@ -70,10 +70,8 @@ if [ -f "$RUNTIME_FILE" ] ; then
     log "$RUNTIME_FILE found, skipping $RUNTIME_FILE generation" >&2
     exit 0
 else
-    log "Generating $RUNTIME_FILE from uv Python version"
-    PYTHON_VERSION_OUTPUT=$(uv run python --version)
-    echo "${PYTHON_VERSION_OUTPUT//Python /python-}" > "$RUNTIME_FILE"
-    cat "$RUNTIME_FILE" | indent
+    log "Generating .python_version from uv Python version"
+    uv python pin > .python_version
 fi
 
 log "Uninstalling uv-managed Python versions"
