@@ -69,6 +69,9 @@ RUNTIME_FILE="runtime.txt"
 if [ -f "$RUNTIME_FILE" ] ; then
     log "$RUNTIME_FILE found, skipping $RUNTIME_FILE generation" >&2
     exit 0
+elif [ -f .python_version ]; then 
+    log ".python_version found, skipping .python_version generation" >&2
+    exit 0
 else
     log "Generating .python_version from uv Python version"
     PYTHON_VERSION_OUTPUT=$(uv run python --version)
